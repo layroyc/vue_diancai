@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue的事件修饰符</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+
+    <div id="app">
+            <div>{{num}}</div>
+            <div v-on:click="divClick" style="border: 1px red solid;">
+                    <button @click.stop="btnClick">点击(不加点stop 不可以点击 button)</button>
+            </div>
+            <div>
+                <a href="https://www.baidu.com"  @click.prevent="aclick" >百度</a>
+            </div>
+    </div>
+ 
+    <script>
+
+        new Vue({
+            el:'#app',
+            data:{
+                num:0
+            },
+            methods: {
+                divClick:function(){
+                    this.num++
+                },
+                btnClick:function(event){
+                    console.log(event)
+                    // event.stopPropagation();  // 简写为  .stop  组织冒泡
+                    this.num--
+                },
+                aclick:function(event){
+                    // event.preventDefault()  // 阻止默认行为 .prevent
+                }
+            }
+        })
+
+    </script>
+    
+</body>
+</html>

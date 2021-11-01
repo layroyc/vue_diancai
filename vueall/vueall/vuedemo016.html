@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选项卡的案例</title>
+    <script src="/vue.js"></script>
+    <style type="text/css">
+        .tab ul {
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tab ul li {
+            box-sizing: border-box;
+            padding: 0;
+            float: left;
+            width: 100px;
+            height: 45px;
+            line-height: 45px;
+            list-style: none;
+            text-align: center;
+            border-top: 1px solid blue;
+            border-right: 1px solid blue;
+            cursor: pointer;
+        }
+
+        .tab ul li:first-child {
+            border-left: 1px solid blue;
+        }
+
+        .tab ul li.active {
+            background-color: orange;
+        }
+
+        .tab div {
+            width: 500px;
+            height: 300px;
+            display: none;
+            text-align: center;
+            font-size: 30px;
+            line-height: 300px;
+            border: 1px solid blue;
+            border-top: 0px;
+        }
+
+        .tab div.current {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="tab">
+            <ul>
+                <li @click="change(index)"  :class="cindex==index?active:''" v-for="(item, index) in persons" :key="item.pid">
+                    {{item.pname}}</li>
+            </ul>
+            
+            <div :class="cindex==index?current:'' ">
+                <img :src="item.picPath"  />
+            </div>
+        </div>
+     
+    </div>
+
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                cindex:0,
+                persons: [
+                    {
+                        pid: 001,
+                        pname: '宁静静',
+                        picPath: '/01.png'
+                    },
+                    {
+                        pid: 002,
+                        pname: '李雪莹',
+                        picPath: '/02.png'
+                    },
+                    {
+                        pid: 001,
+                        pname: '孙朝阳',
+                        picPath: '/03.png'
+                    }
+                ]
+            },
+            methods: {
+                change: function (index) {
+                        this.cindex=index;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

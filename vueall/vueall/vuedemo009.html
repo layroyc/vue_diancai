@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>按键的修饰符</title></title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+            <div id="app">
+                        账户：<input type="text"  v-model="userName"> <br>  
+                        密码：<input type="text"  v-model="userPwd" @keyup.delete="delPwd" > <br>  
+                        <button @click="loginBtn" @keyup.enter="loginBtn">登录</button>
+
+            </div>
+
+            <script>
+                        Vue.config.keyCodes.enter=13
+                      const app = new Vue({
+                        el: '#app',
+                        data: {
+                            userName:'',
+                            userPwd:''
+                        },
+                        methods: {
+                            loginBtn:function(){
+                                    // 按回车后 ， 提交
+                                    alert("提交了。。。")
+                            },
+                            delPwd:function(){
+                                this.userPwd = '一键删除全部字符'
+                            }
+                        }
+                    })
+
+                    // 作业2： 书写一个  登录 ，
+
+
+            </script>
+</body>
+</html>

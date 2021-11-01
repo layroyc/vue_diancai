@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue 分支 -- 和  v-show 的区别</title></title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+            <div v-show="isLook" :style="{ height:gao , width:kuan ,backgroundColor:bgse }">
+               v-show 你能不能够看到我呢 , 本质是：display：none ， 是源代码可以到的， 只是元素隐藏了
+            </div>
+
+            <button @click="showClick" >点击观察v-show的本质</button>
+            <div v-if="isLook2" :style="[kuanGaoObj,bgObj]">
+                    v-if   你能不能够看到我呢 ， 本质是 元素消失了， 源代码看不到。。。
+            </div>
+            <button @click="ifClick" >点击观察v-if的本质</button>
+
+    </div>
+    <script>
+       const app = new Vue({
+            el: '#app',
+            data: {
+                gao:'200px',
+                kuan:'200px',
+                bgse:'red',
+                isLook:true,
+                kuanGaoObj:{
+                    height:'200px',
+                    width:'200px',
+                    
+
+                },
+                bgObj:{
+                    backgroundColor:"blue"
+                },
+                isLook2:true
+                
+            },
+            methods: {
+                showClick:function(){
+                    this.isLook=!this.isLook
+                },
+                ifClick:function(){
+                    this.isLook2= !this.isLook2
+                }
+            }
+        })
+
+    </script>
+
+</body>
+</html>

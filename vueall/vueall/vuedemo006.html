@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-once  只渲染一次的指令</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+            <div id="app">
+                   姓名： <input type="text"  v-model="name"> <br>
+                   <span> {{name}} </span>
+                   <br>
+                   <span v-once>{{name}} </span>
+            </div>
+
+            <script>
+               const app = new Vue({
+                    el: '#app',
+                    data: {
+                        name:'凹凸曼'
+                    },
+                })
+            </script>
+</body>
+</html>

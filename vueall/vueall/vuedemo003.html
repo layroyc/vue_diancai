@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+        <div id="app">
+            <div v-text="name1">
+
+            </div>
+            <br>
+            <div v-html="name2">
+
+            </div>
+
+            <div v-pre>
+                    {{name3}}
+            </div>
+
+        </div>
+
+        <script>
+            const app = new Vue({
+                el: '#app',
+                data: {
+                    name1:"<h1>v-text 不可以被 html编译 他相当于  {{name1}}</h1>",
+                    name2:"<h1> v-html 可以被   html 编译</h1>",
+                    name3:"v-pre 他可以不让插值表达式生效"
+                }
+            });
+        </script>
+</body>
+</html>

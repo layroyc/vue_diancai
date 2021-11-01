@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算属性</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+            <div id="app">
+                    <div>
+                        <span>计算属性由来： 因为 插值表达式 不适合去调用js的方法或者其他运算（通称计算），</span> <br/>
+                        <span> 需要放入到， js 中，才更优雅（因为可以更好的代码提示），他是升级 插值表达式功能的 ,
+                            针对的是 插值表达式 </span>  <br/>
+
+                         <ul>
+                             <li v-for="(item, index) in foods" :key="item.id">{{item.name}} : {{item.price/100}} 元</li>
+                         </ul>
+
+                         <span>不建议上面的写法 , 建议使用 data的计算属性 </span> <br/>
+                         <ul>
+                            <li v-for="(item, index) in priceComputed" :key="item.id">{{item.name}} : {{item.price}} 元</li>
+                        </ul>
+
+                        <button @click="btnUpPrice(2000)" >点击 原味鱼粉 涨为 20元</button>
+                        <button @click="btnUpPrice1(2000)" >点击 原味鱼粉 涨为 20元</button>
+                    </div>
+            </div>
+
+            <script>
+                 const app = new Vue({
+                    el: '#app',
+                   data(){
+                       return {
+                       
+                        foods:[
+                           {
+                               "id":01,
+                               "name":"原味鱼粉",
+                               "price":1200     // 数据库存分。
+                           },
+                           {
+                               "id":02,
+                               "name":"金汤鱼粉",
+                               "price":1300     // 数据库存分。 
+                           },
+                           {
+                               "id":03,
+                               "name":"肥牛鱼粉",
+                               "price":1800     // 数据库存分。 
+                           },
+                           {
+                               "id":04,
+                               "name":"番茄鱼粉",
+                               "price":1500     // 数据库存分。
+                           }
+                       ]
+                       }
+                   },
+                   methods: {
+                     btnUpPrice: function(money){
+                         console.log("涨价啦。。。",money)
+                         console.log(this.priceComputed)
+                         this.priceComputed[0].price=money
+                     },
+                     // 没执行一次，就 调用一次。。 // 任何data中数据变化立即重新计算
+                     btnUpPrice1:function(money){
+                        this.foods[0].price=money // 任何data中数据变化立即重新计算 ,， 不建议 更改数据 ， 只用来 使用。
+                        // 或者 数据 就是 单个！！。。 
+                     }
+                   },
+                   computed: {
+                       // 直接当做普通属性调用不加括号
+                       // 任何data中数据变化立即重新计算
+                       // 计算属性会缓存
+                       priceComputed: {
+                        //     var foodsList=  this.foods;
+                        //     for (let i = 0; i < foodsList.length; i++) {
+                        //         foodsList[i].price= foodsList[i].price/100;
+                        //         console.log(foodsList[i].price)
+                        //     }
+                        //    return foodsList;
+                          
+                        set: function(newPrice){ // 得浏览器调用！》 或者 写个点击事件。
+                            console.log(newPrice)
+                            this.foods[0].price=newPrice
+                        },
+                        get:function(){
+                            var foodsList=  this.foods;
+                            for (let i = 0; i < foodsList.length; i++) {
+                                foodsList[i].price= foodsList[i].price/100;
+                                console.log(foodsList[i].price)
+                            }
+                           return foodsList;
+                        }
+
+
+
+
+                       }
+                        
+                   },
+                   created () {
+                       
+                   }
+
+                })
+            </script>
+</body>
+</html>

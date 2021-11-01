@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>解决 vuedemo001 三元运算中的问题， 没有把男神变为红色  </title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <div>
+            <span v-if="height>=180"><h1 style="color: red;">男神</h1></span>
+            <span v-else=""><h1 style="color: green;">男人</h1></span>
+        </div>
+        <div>
+                  <span v-if="height>=180"><h1 v-html="text"></h1></span>
+                  <span v-else=""><h1 v-html="text2"></h1></span>
+        </div>
+        
+    </div>
+
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                height:130,
+                text:"<span style='color: red;'>男神</span>",
+                text2:"<span style='color: green;'>男人</span>",
+            }
+        })
+    </script>
+    
+</body>
+</html>

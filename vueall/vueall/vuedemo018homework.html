@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        .foodsOneDiv {
+            margin: 20px;
+            float: left;
+        }
+        .ddd{
+            clear: left;
+        }
+        .personInfoDiv {
+            border: solid 1px  red;
+           width: 400px;
+           margin-top: 400px;
+        }
+        .personDiv .leftDiv {
+            float: left;
+             
+        }
+
+        .personDiv .rightDiv {
+            float: right;
+            width: 200px;
+            height: 200px;
+          
+        }
+       
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="foodsRowDiv">
+
+            <div class="foodsOneDiv" v-for="(item, index) in foodss" :key="item.foodId">
+                <div class="foodsOnePicDiv">
+                    <img :src="['http://127.0.0.1:9988/imgfile/'+item.foodPic]" @click="sellFoodClick(item)">
+                </div>
+                <div class="foodsOneOtherDiv">
+                    <span>名称：{{item.foodName}}</span> <br>
+                    <span>单价：{{item.foodPrice/100}}元</span> <br>
+                    <span>数量：{{item.foodCount}} </span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="ddd"></div>
+
+
+        <div class="personInfoDiv">
+            <div class="personDiv">
+                    <div class="personPicDiv leftDiv">
+                            <img :src="['http://127.0.0.1:9988/imgfile/'+person.personPic]" style="width: 200px; height: 200px;" >
+                    </div>
+                    
+                    <div class="rightDiv">
+                        <span>名称：{{person.personName}}</span> <br>
+                        <span>工资：{{person.personSal/100}}元</span> <br>
+                        <span>原余额：{{newValue}}元 </span><br>
+                        <span>买食物后余额：{{moneyX}} </span><br>
+                        
+
+                    </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    foodss: [],
+                    person:{},
+                    moneyX:0,
+                    newValue:0,
+                    oldValue:0
+                }
+            },
+            methods: {
+                loadFoods: function () {
+                    axios.get("http://127.0.0.1:9988/api/foods/selectAll", {
+                        params: {}
+                    }).then((ret) => {
+                        this.foodss = ret.data.foodss;
+                    })
+                },
+                loadPersonById:function(){
+                    axios.get("http://127.0.0.1:9988/api/person/personId", {
+                      params: {
+                        personId: 1
+                      }
+                    }).then((ret) => {
+                      console.log(ret.data.data)
+                      this.person= ret.data.data
+                      this.moneyX=ret.data.data.personMoney
+                      this.oldValue=ret.data.data.personMoney
+                      this.newValue=ret.data.data.personMoney
+                    })
+                },
+                sellFoodClick:function(item){
+                   console.log(item);
+                   console.log(this.person.personMoney)
+                    // 让牛志洋得 钱数(person.personMoney  - item.foodPrice )/100
+                   this.person.personMoney =  this.person.personMoney  -   item.foodPrice  
+                   console.log('牛志洋得余额： ',   this.person.personMoney )
+                   this.moneyX=this.person.personMoney;
+                }
+
+            },
+            created() {
+                this.loadFoods();
+                this.loadPersonById()
+            },
+            watch: {
+                moneyX:function(newVal, oldVal){
+                   console.log('newVal---',newVal);  
+                   this.newValue=newVal;   
+                   console.log('oldVal---',oldVal);   
+                   this.oldValue=oldVal;  
+                }
+            },
+
+        })
+    </script>
+</body>
+
+</html>

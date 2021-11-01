@@ -1,0 +1,42 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>属性绑定！</title>
+     <script src="/vue.js"></script>
+ </head>
+ <body>
+
+      <div id="app">
+            <a  :href="urlData">{{textData}}</a>  <br>
+            <button @click="changeUrl">切换打开是百度或者是163</button>
+      </div>
+
+      <script>
+          new Vue({
+              el:'#app',
+              data:{
+                urlData:"http://www.baidu.com",
+                textData:"点击打开是百度",
+                isChange:true
+              },
+              methods:{
+                changeUrl(){
+                    console.log(this.isChange)
+                    if(this.isChange){
+                          this.urlData="http://www.baidu.com",
+                          this.textData="点击打开是百度",
+                          this.isChange=false
+                    }else{
+                         this.urlData="http://www.163.com",
+                          this.textData="点击打开是163",
+                          this.isChange=true
+                    }
+                }
+              }
+              // 作业1：   点击开关按钮，实现  背景色 变黑 ，文本变白，    
+          })
+      </script>
+ </body>
+ </html>

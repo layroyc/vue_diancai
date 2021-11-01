@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>v-clock的用法： 可以 隐藏 未显示的 插值表达式 ,原理是 先隐藏 插值表达式， 等渲染好了就直接出现了 </h1>
+
+    <div id="app">
+            <span v-cloak>{{name}}</span>
+    </div>
+
+    <script>
+            new Vue({
+                el:'#app',
+                data:{
+                    name:'奥特曼'
+                }
+            })
+
+    </script>
+</body>
+</html>

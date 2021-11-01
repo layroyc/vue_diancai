@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+            <!-- click 可以直接 调用数据的 自增/自减的方法，快捷方便 -->
+            <div id="app">
+                    <span> {{num}}  </span>  <br>
+                    <button @click="num++"> 让计数器加</button>
+                    <button v-on:click="jianfa()"> 让计数器减少</button>
+                    <button v-on:click="jianfa"> 让计数器减少</button>
+                    <button id="btnnnn" v-on:click="fuzaClick(123,456,$event)"  > 点击事件的传参 , 发送验证码</button>
+                   <!-- 点击按钮 把    id="btnnnn" 显示到  插值表达式当中-->  {{id}} 
+            </div>
+
+            <script>
+              var vm=  new Vue({
+                    el:'#app',
+                    data:{
+                        num:0,
+                        id:''
+                    },
+                    methods: {
+                     
+                        jianfa:function(event){
+                            console.log(this==vm)  // 观察 是 true 还是 false， 见证  this 是否是 vue对象 ， 结果是true
+                           // vm.num--;  // 在vue方法中，调用 data ， 需要 使用this 关键字
+                             this.num--;  // 在vue方法中，调用 data ， 需要 使用this 关键字
+
+                             // 当 click 没有参数的时候，其实 是有一个 内置的参数的，叫做 event ， 意思，事件
+                             console.log(event)  // event 内涵 参数 有相当多的 功能！！！！！！  十分强大！！ 
+                        },
+                        fuzaClick:function(x,y,event){
+                            console.log(x)
+                            console.log(y)
+                            console.log(event)  // 练习： 当点击事件结束后，给 属性加上  disabled
+                            //console.log(event.target.disabled=true) // 点击一下 让 这个 按钮隐藏
+                           //  event.target.hidden=true;  点击按钮 把   button的id  显示到  插值表达式当中
+                             this.id= event.target.id;
+                             // 点击 发送验证码后， 让 按钮变不可用的灰色，然后 在上面显示 倒计时！！！！！
+                        }
+                    }
+
+                })
+            </script>
+    
+</body>
+</html>

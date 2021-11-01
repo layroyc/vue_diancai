@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>class样式绑定之 数组的绑定</title>
+    <script src="/vue.js"></script>
+    <style>
+        .divClass{
+            border: 1px solid red;
+            width: 200px;
+            height: 200px;
+        }
+        .divClass2{
+
+            background-color: seagreen;
+        }
+        .divClass3{
+            background-color: yellow;
+            }
+    </style>
+</head>
+<body>  
+
+        <div id="app">
+
+            <div :class="[divClassX,divClassY,{divClass:isDivClass}]">
+                绑定指令 之  样式绑定！！！ 之 class  数组绑定, 可以混用， 但是 必须对象在数组里
+           </div>    
+           <!-- 可以把 class 中的数组或者 对象写到 data当中 -->
+           <div :class="arryClass">
+                 可以把 class 中的数组或者 对象写到 data当中
+           </div>
+
+           <div :class="objClass">
+            可以把 class 中的  对象写到 data当中
+      </div>
+           
+        <div>
+            <button @click="qiehuan">点击 切换 黄色 ， 绿色   </button>
+        </div>
+
+        </div>
+
+        <script>
+            new Vue({
+                el:'#app',
+                data(){
+                    return {
+                        divClassM:'divClass',
+                        divClassX:'divClass2',
+                        divClassY:'divClass3',
+                        isDivClass:true,
+                        // 可以把 class 中的数组或者 对象写到 data当中
+                        arryClass:['divClass2','divClass'],
+                        objClass:{
+                            divClass3:true,
+                            divClass:true
+                        }
+                    }
+                },
+                methods: {
+                    qiehuan:function(){
+                    // 操作  isDivClassX
+                     if(this.divClassX==''){
+                          this.divClassY= ''
+                          this.divClassX='divClass2'
+                     }else{
+                         this.divClassX='';
+                         this.divClassY='divClass3'
+                     }
+                }
+                }
+            })
+        </script>
+    
+</body>
+</html>

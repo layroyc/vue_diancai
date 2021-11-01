@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>循环</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+        <div id="app">
+                <table border="1" cellspacing="0" cellpadding="1" >
+                    <caption>学生列表</caption>
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>学号</th>
+                            <th>姓名</th>
+                            <th>年龄</th>
+                            <th>性别</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr  v-for="(item, index) in students" :key="item.stuId" >
+                            <td> {{index}}  </td>
+                            <td> {{item.stuId}}  </td>
+                            <td> {{item.stuName}}  </td>
+                            <td> {{item.stuAge}}  </td>
+                            <td> {{item.stuSex}}  </td>
+                        </tr>
+
+                    </tbody>
+                    
+                </table>
+
+        </div>
+
+        <script>
+             const app = new Vue({
+                el: '#app',
+                data: {
+                    students:[
+                        {
+                            stuId:034,
+                            stuName:'杨渊惠',
+                            stuAge:'13',
+                            stuSex:0
+                        },
+                        {
+                            stuId:089,
+                            stuName:'孙朝阳',
+                            stuAge:'38',
+                            stuSex:1
+                        },
+                        {
+                            stuId:053,
+                            stuName:'宁静静',
+                            stuAge:'20',
+                            stuSex:0
+                        }
+                    ]
+                },
+            })
+        </script>
+</body>
+</html>
